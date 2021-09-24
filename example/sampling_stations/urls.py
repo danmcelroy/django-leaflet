@@ -14,20 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf import settings
-from django.urls import include
 from django.conf.urls import url
 from django.conf.urls.static import static
-from django.contrib import admin
 from django.views.generic import TemplateView
 from djgeojson.views import GeoJSONLayerView
-from sampling_stations.urls import urlpatterns as sampling_stations_urls
 
-from .models import MushroomSpot
+from .models import SamplingStation
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
-    url(r'^data.geojson$', GeoJSONLayerView.as_view(model=MushroomSpot, properties=('title', 'description', 'picture_url')), name='data'),
-    url(r'^sampling_stations/', include(sampling_stations_urls))
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^$', TemplateView.as_view(template_name='sampling_stations/index.html'), name='sampling_stations'),
+    url(r'^station_data.geojson$', GeoJSONLayerView.as_view(model=SamplingStation, properties=('title', 'description')), name='station_data')
+]

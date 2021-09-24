@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from . import models as sampling_station_models
+
+
+admin.site.register(sampling_station_models.SamplingStation)

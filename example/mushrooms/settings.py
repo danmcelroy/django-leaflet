@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     'leaflet',
     'djgeojson',
-    'mushrooms'
+    'mushrooms',
+    'sampling_stations'
 ]
 
 MIDDLEWARE = [
