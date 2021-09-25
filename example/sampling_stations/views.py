@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import SamplingStationForm
 
 def create_station(request):
@@ -7,4 +7,4 @@ def create_station(request):
     else:
         form = SamplingStationForm(request.POST)
         form.save()
-        return redirect('station_data')
+        return redirect('sampling_stations')
