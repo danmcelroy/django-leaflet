@@ -18,11 +18,13 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from djgeojson.views import GeoJSONLayerView
+from . import views
 
 from .models import SamplingStation
 
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='sampling_stations/index.html'), name='sampling_stations'),
-    url(r'^station_data.geojson$', GeoJSONLayerView.as_view(model=SamplingStation, properties=('title', 'description')), name='station_data')
+    url(r'^station_data.geojson$', GeoJSONLayerView.as_view(model=SamplingStation, properties=('title', 'description')), name='station_data'),
+    url(r'^create', views.create_station, name='create_station')
 ]
