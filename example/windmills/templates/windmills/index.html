@@ -1,0 +1,37 @@
+{% load leaflet_tags %}
+<html>
+  <head>
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <style>
+      .leaflet-container { height: 100%; }
+    </style>
+    <script>
+    const wind = [
+      {% for w in windmills %}
+       ["{{ w.title }}",{{ w.latitude }},{{ w.longitude }}],
+     {% endfor %}
+   ];
+      window.addEventListener("map:init", function (event) {
+        let map = event.detail.map;
+        wind.forEach(function(wm) {
+          let marker = new L.circleMarker(new L.LatLng(wm[1], wm[2]),
+            {
+              radius: 6,
+              fillColor: "#ff7800",
+              color: "#000",
+              weight: 1,
+              opacity: 1,
+              fillOpacity: 0.5
+            })
+            .bindPopup(wm[0])
+            .addTo(map);
+        })
+        });
+    </script>
+  </head>
+  <body>
+    <h1>Windmills</h1>
+    {% leaflet_map "main" %}
+  </body>
+</html>
